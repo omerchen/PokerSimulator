@@ -1,5 +1,5 @@
-import { buildDeck, shuffleDeck, dealCards, deal } from "./deck.js";
-import { hasRoyalFlushOrBetter } from "./rules.js";
+import { buildDeck, shuffleDeck, dealCards, deal, Card } from "./deck.js";
+import { hasFourOfAKindOrBetter, hasRoyalFlushOrBetter } from "./rules.js";
 
 export function preflopAcesKingsQueens(numberOfHands: number): boolean {
   const deck = buildDeck();
@@ -38,6 +38,37 @@ export function flopRoyalFlush(players: number): boolean {
       console.log(player, board);
       return true;
     }
+  }
+
+  return false;
+}
+
+export function royalFlushVsQuadsAces(players: number): boolean {
+  const deck = buildDeck();
+  const shuffledDeck = shuffleDeck(deck);
+  const hand = deal(shuffledDeck, players, 2);
+  const board = [...hand.flop, hand.turn, hand.river];
+
+  var royalHand: Card[] | undefined;
+  var quadsAcesHand: Card[] | undefined;
+
+  for (let player of hand.playerCards) {
+    if (hasRoyalFlushOrBetter(player, board)) {
+      royalHand = player;
+    }
+    const [hasQuads, quadsNumber] = hasFourOfAKindOrBetter(player, board);
+    if (hasQuads && quadsNumber === "A") {
+      quadsAcesHand = player;
+    }
+  }
+
+  if (royalHand && quadsAcesHand) {
+    console.log(
+      royalHand.map((card) => card.id),
+      quadsAcesHand.map((card) => card.id)
+    );
+    console.log(board.map((card) => card.id));
+    return true;
   }
 
   return false;

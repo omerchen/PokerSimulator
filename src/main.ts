@@ -1,4 +1,8 @@
-import { preflopAcesKingsQueens, flopRoyalFlush } from "./checks.js";
+import {
+  preflopAcesKingsQueens,
+  flopRoyalFlush,
+  royalFlushVsQuadsAces,
+} from "./checks.js";
 import { buildDeck, dealCards, shuffleDeck } from "./deck.js";
 import { hasRoyalFlushOrBetter } from "./rules.js";
 
@@ -42,7 +46,7 @@ function runThesis(
 }
 
 function main(): void {
-  const result = runThesis(10000000000, () => flopRoyalFlush(1), true);
+  const result = runThesis(10000000000, () => royalFlushVsQuadsAces(9), true);
 }
 
 main();

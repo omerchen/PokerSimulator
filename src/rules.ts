@@ -118,9 +118,15 @@ export function hasFullHouseOrBetter(hand: Card[], board: Card[]): boolean {
   );
 }
 
-export function hasFourOfAKindOrBetter(hand: Card[], board: Card[]): boolean {
+export function hasFourOfAKindOrBetter(
+  hand: Card[],
+  board: Card[]
+): [boolean, CardNumber | undefined] {
   const counter = countNumbers(hand, board);
-  return Object.values(counter).filter((count) => count >= 4).length > 0;
+  const fourOfAKindNumber = Object.keys(counter).find(
+    (number) => counter[number as CardNumber] >= 4
+  );
+  return [fourOfAKindNumber !== undefined, fourOfAKindNumber as CardNumber];
 }
 
 export function hasStraightFlushOrBetter(hand: Card[], board: Card[]): boolean {

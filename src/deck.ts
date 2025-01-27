@@ -60,8 +60,7 @@ export function buildDeck(): Card[] {
 }
 
 export function shuffleDeck(deck: Card[]): Card[] {
-  // Shuffle the deck 5 times
-  for (let i = 0; i < 5; i++) {
+  for (let i = 0; i < 1; i++) {
     deck = deck.sort(() => Math.random() - 0.5);
   }
   return deck;
