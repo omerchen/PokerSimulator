@@ -1,0 +1,16 @@
+{
+  "name": "poker-simulator",
+  "version": "1.0.0",
+  "type": "module",
+  "description": "A poker game simulator",
+  "main": "dist/main.js",
+  "scripts": {
+    "build": "tsc",
+    "start": "node dist/main.js",
+    "dev": "tsc -w"
+  },
+  "devDependencies": {
+    "typescript": "^5.4.2",
+    "@types/node": "^20.11.24"
+  }
+}
